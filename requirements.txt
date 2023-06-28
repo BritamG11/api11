@@ -1,2 +1,3 @@
 fastapi==0.98.0
 uvicorn
+psycopg2==2.9.6
