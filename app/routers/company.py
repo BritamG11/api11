@@ -18,11 +18,8 @@ def get_companies(db: Session = Depends(get_db), user_id: int = Depends(oauth2.g
 
 # create a company
 @router.post("/", status_code=status.HTTP_201_CREATED, response_model=schemas.Company)
-def create_company(post: schemas.CompanyCreate, db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
-    # cursor.execute("""INSERT INTO posts (title, content, published) VALUES (%s, %s, %s) RETURNING *""",
-    #                (post.title, post.content, post.published))
-    # new_post = cursor.fetchone()
-    # conn.commit()
+def create_company(post: schemas.CompanyCreate, db: Session = Depends(get_db),
+                   user_id: int = Depends(oauth2.get_current_user)):
     new_company = models.Company(**post.dict())
     db.add(new_company)
     db.commit()
@@ -33,9 +30,6 @@ def create_company(post: schemas.CompanyCreate, db: Session = Depends(get_db), u
 # Fetching individual company
 @router.get("/{id}", response_model=schemas.Company)
 def get_company(id: int, db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
-    # cursor.execute("""SELECT * from posts WHERE id = %s """, (str(id),))
-    # post = cursor.fetchone()
-
     company = db.query(models.Company).filter(models.Company.id == id).first()
     if not company:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -46,9 +40,6 @@ def get_company(id: int, db: Session = Depends(get_db), user_id: int = Depends(o
 # Delete company
 @router.delete("/{id}", status_code=status.HTTP_204_NO_CONTENT)
 def delete_company(id: int, db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
-    # cursor.execute("""DELETE FROM posts WHERE id = %s returning *""", (str(id),))
-    # delete_post = cursor.fetchone()
-    # conn.commit()
     delete_company = db.query(models.Company).filter(models.Company.id == id)
     if delete_company.first() == None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
@@ -61,12 +52,8 @@ def delete_company(id: int, db: Session = Depends(get_db), user_id: int = Depend
 
 # update company
 @router.put("/{id}", response_model=schemas.Company)
-def update_company(id: int, updated_company: schemas.CompanyCreate, db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
-    # cursor.execute("""UPDATE posts SET title = %s, content = %s, published = %s WHERE id = %s RETURNING *""",
-    #                (post.title, post.content, post.published, str(id),))
-    #
-    # updated_post = cursor.fetchone()
-    # conn.commit()
+def update_company(id: int, updated_company: schemas.CompanyCreate, db: Session = Depends(get_db),
+                   user_id: int = Depends(oauth2.get_current_user)):
     company_query = db.query(models.Company).filter(models.Company.id == id)
     company = company_query.first()
 
