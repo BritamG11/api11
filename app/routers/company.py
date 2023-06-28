@@ -12,8 +12,6 @@ router = APIRouter(
 # all companies
 @router.get("/", response_model=list[schemas.Company])
 def get_companies(db: Session = Depends(get_db), user_id: int = Depends(oauth2.get_current_user)):
-    # cursor.execute("""SELECT * FROM posts""")
-    # posts = cursor.fetchall()
     companies = db.query(models.Company).all()
     return companies
 
