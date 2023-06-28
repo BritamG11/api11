@@ -2,3 +2,11 @@ fastapi==0.98.0
 uvicorn
 psycopg2-binary==2.9.6
 sqlalchemy==2.0.17
+
+sqlmodel
+typer
+dynaconf
+jinja2
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
