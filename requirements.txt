@@ -1,8 +1,8 @@
-fastapi==0.98.0
+fastapi==0.100.0
 uvicorn
 psycopg2-binary==2.9.6
-sqlalchemy==2.0.17
-pydantic[email]
+sqlalchemy==2.0.18
+pydantic[email]==2.0.2
 sqlmodel
 typer
 dynaconf

@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLACHEMY_DATABASE_URL = 'postgresql://postgresql_nkap_user:BP3opO8zdrhc90R1Wlf2vwfiEVRO7ZQA@dpg-cidur7h5rnukltljcieg-a.singapore-postgres.render.com/postgresql_nkap'
+SQLACHEMY_DATABASE_URL = 'postgresql://postgres:postgres@localhost/britam'
 
 engine = create_engine(SQLACHEMY_DATABASE_URL)
 
